@@ -13,5 +13,6 @@ function onScanSuccess(decodedText, decodedResult) {
 
 const qr_instance = new Html5Qrcode('qr_reader');
 
-qr_instance.start({ facingMode: { exact: 'environment'} }, {}, onScanSuccess);
+qr_instance.start({ facingMode: 'environment' }, {}, onScanSuccess);
+//qr_instance.start({ facingMode: { exact: 'environment'} }, {}, onScanSuccess);
 </script>

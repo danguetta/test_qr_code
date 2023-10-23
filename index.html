@@ -1,16 +1,32 @@
 <!-- include the library -->
 <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
 
-<!-- width:75%; aspect-ratio: 1/1; -->
-<div id="qr_reader" style='border-style:solid; width:75%; aspect-ratio:1/1'></div>
+<center>
+    <div id='qr_reader' style='border-style:solid; width:75%; aspect-ratio:1/1'></div>
+    <br>
+    <div id='outer_prog' style='width:75%; background-color: lightgrey; height: 30px; text-align: left'>
+        <div id='inner_prog' style='width:0%; height:30px; background-color: #2997d6'></div>
+    </div>
+    
+</center>
 
 <div id='res'></div>
 
 <script>
+
+const fingerprints_needed = 3;
+
+const collected_fingerprints = []
+
 function onScanSuccess(decodedText, decodedResult) {
-    document.getElementById('res').innerHTML = document.getElementById('res').innerHTML
-                                                + decodedText
-                                                + '<br>';
+    // We have decoded a URL; check if we already have it - if not,
+    // add it to our collected codes
+    if (collected_fingerprints.indexOf(decodedText) == -1) {
+        collected_fingerprints.push(decodedText);
+        
+        const inner_prog = document.getElementById('inner_prog');
+        inner_prog.style.width = parseInt(collected_fingerprints.length*100/fingerprints_needed) + '%'
+    }
 }
 
 const qr_instance = new Html5Qrcode('qr_reader');

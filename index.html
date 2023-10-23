@@ -1,7 +1,9 @@
 <!-- include the library -->
 <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
 
-<div id="qr_reader" style='width:75%; aspect-ratio: 1/1; border-style:solid'></div>
+<!-- width:75%; aspect-ratio: 1/1; -->
+<div id="qr_reader" style='border-style:solid; width:75%; aspect-ratio:1/1'></div>
+
 <div id='res'></div>
 
 <script>
@@ -13,6 +15,6 @@ function onScanSuccess(decodedText, decodedResult) {
 
 const qr_instance = new Html5Qrcode('qr_reader');
 
-qr_instance.start({ facingMode: 'environment' }, {}, onScanSuccess);
+qr_instance.start({facingMode: 'environment'}, {aspectRatio:1}, onScanSuccess);
 //qr_instance.start({ facingMode: { exact: 'environment'} }, {}, onScanSuccess);
 </script>

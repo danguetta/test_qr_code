@@ -1,13 +1,17 @@
 <!-- include the library -->
 <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
 
-<div id="qr-reader" style="width: 600px"></div>
+<div id="qr_reader" style="width: 600px"></div>
+<div id="res"></div>
 
 <script>
 function onScanSuccess(decodedText, decodedResult) {
-    console.log(`Code scanned = ${decodedText}`, decodedResult);
+    document.getElementById('res').innerHTML = document.getElementById('res').innerHTML
+                                                + decodedText
+                                                + '<br>';
 }
-var html5QrcodeScanner = new Html5QrcodeScanner(
-	"qr-reader", { fps: 10, qrbox: 250 });
-html5QrcodeScanner.render(onScanSuccess);
+
+const qr_instance = new Html5Qrcode('qr_reader');
+
+qr_instance.start({ facingMode: { exact: 'environment'} }, {}, onScanSuccess);
 </script>
